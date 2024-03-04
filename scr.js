@@ -128,11 +128,10 @@ function showResult() {
         questionNumber++;
     });
 
-    resultHTML += `<p>Số câu đã làm: ${totalAnswered}</p>`;
-    
+    resultHTML += `<p><strong>Số câu đã làm:</strong> ${totalAnswered}</p>`;
+    resultHTML += `<p><strong>Số câu trả lời đúng:</strong> ${correctAnswers}</p>`;
     const score = (correctAnswers / questions.length) * 10;
-    resultHTML += `<p>Số câu trả lời đúng: ${correctAnswers}</p>`;
-    resultHTML += `<p>Điểm số: ${score}</p>`;
+    resultHTML += `<p><strong>Điểm số:</strong> ${score}</p>`;
     resultContainer.innerHTML = resultHTML;
     form.querySelectorAll('input, textarea, button').forEach(elem => {
         elem.disabled = true;
