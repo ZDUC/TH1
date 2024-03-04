@@ -84,12 +84,16 @@ function loadQuestions() {
 
 function showResult() {
     let correctAnswers = 0;
+    let totalAnswered = 0;
     let resultHTML = "<h2>Kết quả:</h2>";
     const formData = new FormData(form);
     let questionNumber = 1;
     questions.forEach((question, index) => {
         resultHTML += `<p><strong>Câu hỏi ${questionNumber}:</strong></p>`;
         const answer = formData.get(`question${questionNumber}`) || "Chưa chọn";
+        if (answer !== null && answer !== "Chưa chọn") {
+            totalAnswered++;
+        }
         if (Array.isArray(question.answer)) {
             const correctOptions = question.answer;
             resultHTML += `<p>Đáp án: ${correctOptions.join(', ')}</p>`;
@@ -124,6 +128,8 @@ function showResult() {
         questionNumber++;
     });
 
+    resultHTML += `<p>Số câu đã làm: ${totalAnswered}</p>`;
+    
     const score = (correctAnswers / questions.length) * 10;
     resultHTML += `<p>Số câu trả lời đúng: ${correctAnswers}</p>`;
     resultHTML += `<p>Điểm số: ${score}</p>`;
